@@ -14,7 +14,6 @@ export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const email = form.get("email")?.toString();
   const password = form.get("password")?.toString();
-  console.log("supabase", supabase);
   console.log("email", email);
   console.log("password", password);
   const { session, error } = await supabase.auth.signIn({ email, password });
@@ -39,21 +38,49 @@ const Login = () => {
   const { state } = useTransition();
 
   return (
-    <Form method="post">
-      <div>
-        <div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input id="email" name="email" type="email" required />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input id="password" name="password" type="password" required />
-          </div>
-          <button type="submit">Login</button>
+    <div className="flex bg-gradient-to-r from-cyan-500 to-blue-500 w-full px-4 py-10 h-screen">
+      <div className="card glass lg:card-side text-neutral-content">
+        <div className="w-1/2">
+          <figure className="p-6">
+            <img src="/images/ud_login.svg" className="rounded-lg shadow-lg" />
+          </figure>
+        </div>
+        <div className="w-lg card-body form-control">
+          <h2 className="card-title">Login</h2>
+          <Form method="post">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-neutral-content">Email</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                className="input input-bordered rounded-sm border-sky-500 border-b-4 border-b-sky-700"
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-neutral-content">
+                  Password
+                </span>
+              </label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                className="input input-bordered rounded-sm border-sky-500 border-b-4 border-b-sky-700"
+              />
+            </div>
+            <div className="card-actions">
+              <button className="btn glass rounded-sm" type="submit">
+                Submit
+              </button>
+            </div>
+          </Form>
         </div>
       </div>
-    </Form>
+    </div>
   );
 };
 
